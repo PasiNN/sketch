@@ -33,7 +33,7 @@ w1 = np.matrix([prototype1, prototype2])
 b1 = np.matrix([len(prototype1), len(prototype1)]).T
 forward_layer = Neuron(w1, b1, "PURELIN")
 
-classes = 2
+classes = len(b1)
 delta = 0
 epsilon = 1 / (classes + delta)
 w2 = np.matrix([[1, -epsilon], [-epsilon, 1]])

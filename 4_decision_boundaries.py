@@ -32,7 +32,6 @@ class LinearlySeparableSets:
             self.x1[i] = res[0] + offset_x
             self.y1[i] = res[1] + offset_y
 
-
 class Neuron:
     def __init__(self, weights, bias, tfuncction):
         self.w = weights
@@ -53,9 +52,7 @@ class Neuron:
             res = self.hardlim(res)
         else:
             raise Exception('TF not set.')
-
         return res
-
 
 def draw_decision_boundary(w, b):
     x = np.linspace(-2,2,10)
@@ -77,7 +74,7 @@ def test_solution(w, b, lss):
 
 
 # test
-lss = LinearlySeparableSets(2)
+lss = LinearlySeparableSets(1)
 
 plt.xlabel('x') 
 plt.ylabel('y') 
@@ -91,12 +88,13 @@ plt.title('Plot')
 plt.plot(lss.x0, lss.y0, 'bo') 
 plt.plot(lss.x1, lss.y1, 'r+') 
 
-# random decision boundary for testing
-w = np.matrix([random()*2-1, random()*2-1])
-b = random()*2-1
-plt.plot(w[0,0], w[0,1], 'g^') 
-draw_decision_boundary(w, b)
+# random search for solution
+while (True):
+    w = np.matrix([random()*2-1, random()*2-1])
+    b = random()*2-1
+    plt.plot(w[0,0], w[0,1], 'g^') # direction of weight vector (which side is which)
+    draw_decision_boundary(w, b)
+    if (test_solution(w, b, lss)):
+        break
+
 plt.show() 
-
-print(test_solution(w, b, lss))
-
